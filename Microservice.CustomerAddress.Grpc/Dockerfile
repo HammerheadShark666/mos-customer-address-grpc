@@ -9,17 +9,17 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Microservice.Customer.Address.Grpc/Microservice.Customer.Address.Grpc.csproj", "Microservice.Customer.Address.Grpc/"]
-RUN dotnet restore "./Microservice.Customer.Address.Grpc/Microservice.Customer.Address.Grpc.csproj"
+COPY ["Microservice.CustomerAddress.Grpc/Microservice.CustomerAddress.Grpc.csproj", "Microservice.CustomerAddress.Grpc/"]
+RUN dotnet restore "./Microservice.CustomerAddress.Grpc/Microservice.CustomerAddress.Grpc.csproj"
 COPY . .
-WORKDIR "/src/Microservice.Customer.Address.Grpc"
-RUN dotnet build "./Microservice.Customer.Address.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Microservice.CustomerAddress.Grpc"
+RUN dotnet build "./Microservice.CustomerAddress.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Microservice.Customer.Address.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Microservice.CustomerAddress.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Microservice.Customer.Address.Grpc.dll"]
+ENTRYPOINT ["dotnet", "Microservice.CustomerAddress.Grpc.dll"]
