@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f0e61364-9899-4c8e-9284-6c4b9171d961</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mediatr\**" />
+    <Content Remove="Mediatr\**" />
+    <EmbeddedResource Remove="Mediatr\**" />
+    <None Remove="Mediatr\**" />
+  </ItemGroup>
+ 
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.9.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.62.0" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\customer-address.proto" GrpcServices="Server" ProtoRoot="Protos" />
+	</ItemGroup>
+
+
+</Project>
