@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /.env
 /Microservice.CustomerAddress.Grpc/appsettings.Development.json
+/Microservice.CustomerAddress.Grpc/Properties/launchSettings.json
