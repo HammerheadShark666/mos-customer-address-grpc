@@ -54,4 +54,4 @@ jobs:
           app-name: 'prod-ap-ms-order-customer-address-grpc'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FC14B53E6138450EBCFE4970C6B0E77C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5BFA8CD845794422B08BF60C3BA785D4 }}
