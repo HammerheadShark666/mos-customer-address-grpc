@@ -1,6 +1,6 @@
 syntax = "proto3";
  
-option csharp_namespace = "Microservice.Customer.Address.Api.Protos";
+option csharp_namespace = "Microservice.CustomerAddress.Api.Protos";
 
 package CustomerAddress; 
 

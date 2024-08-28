@@ -1,4 +1,4 @@
-﻿namespace Microservice.Customer.Address.Grpc.Helpers;
+﻿namespace Microservice.CustomerAddress.Grpc.Helpers;
 
 public class EnvironmentVariablesHelper
 {

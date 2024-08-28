@@ -1,11 +1,11 @@
-﻿using Microservice.Customer.Address.Grpc.Data.Contexts;
-using Microservice.Customer.Address.Grpc.Data.Repository.Interfaces;
+﻿using Microservice.CustomerAddress.Grpc.Data.Context;
+using Microservice.CustomerAddress.Grpc.Data.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Microservice.Customer.Address.Grpc.Data.Repository;
+namespace Microservice.CustomerAddress.Grpc.Data.Repository;
 
 public class CustomerAddressRepository(IDbContextFactory<CustomerAddressDbContext> dbContextFactory) : ICustomerAddressRepository
-{    
+{
     public IDbContextFactory<CustomerAddressDbContext> _dbContextFactory { get; set; } = dbContextFactory;
 
     public async Task<Grpc.Domain.CustomerAddress> ByIdAsync(Guid customerId, Guid addressId)
@@ -15,5 +15,5 @@ public class CustomerAddressRepository(IDbContextFactory<CustomerAddressDbContex
                         .Where(o => o.Id.Equals(addressId) && o.CustomerId.Equals(customerId))
                         .Include(e => e.Country)
                         .SingleOrDefaultAsync();
-    } 
+    }
 }

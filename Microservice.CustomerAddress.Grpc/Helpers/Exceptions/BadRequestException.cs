@@ -1,4 +1,4 @@
-﻿namespace Microservice.Customer.Address.Grpc.Helpers.Exceptions;
+﻿namespace Microservice.CustomerAddress.Grpc.Helpers.Exceptions;
 
 public class BadRequestException : Exception
 {

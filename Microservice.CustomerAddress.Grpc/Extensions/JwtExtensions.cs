@@ -1,12 +1,12 @@
-﻿using Microservice.Customer.Address.Grpc.Helpers;
+﻿using Microservice.CustomerAddress.Grpc.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Microservice.Customer.Address.Api.Address.Api.Extensions;
+namespace Microservice.CustomerAddress.Grpc.Extensions;
 
 public static class JwtExtensions
-{  
+{
     public static void AddJwtAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication(optiones =>

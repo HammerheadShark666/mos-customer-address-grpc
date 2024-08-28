@@ -1,15 +1,14 @@
-﻿using Microservice.Customer.Address.Api.Address.Api.Extensions;
-using Microservice.Customer.Address.Grpc.Data.Contexts;
-using Microservice.Customer.Address.Grpc.Data.Repository;
-using Microservice.Customer.Address.Grpc.Data.Repository.Interfaces;
-using Microservice.Customer.Address.Grpc.Helpers;
-using Microservice.Customer.Address.Grpc.Helpers.Interceptors;
-using Microservice.Customer.Address.Grpc.Middleware;
+﻿using Microservice.CustomerAddress.Grpc.Data.Context;
+using Microservice.CustomerAddress.Grpc.Data.Repository;
+using Microservice.CustomerAddress.Grpc.Data.Repository.Interfaces;
+using Microservice.CustomerAddress.Grpc.Helpers;
+using Microservice.CustomerAddress.Grpc.Helpers.Interceptors;
+using Microservice.CustomerAddress.Grpc.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
-namespace Microservice.Customer.Address.Grpc.Extensions;
+namespace Microservice.CustomerAddress.Grpc.Extensions;
 
 public static class IServiceCollectionExtensions
 {
@@ -24,18 +23,18 @@ public static class IServiceCollectionExtensions
     }
 
     public static void ConfigureDI(this IServiceCollection services)
-    { 
+    {
         services.AddScoped<ICustomerAddressRepository, CustomerAddressRepository>();
         services.AddMemoryCache();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-    } 
+    }
 
     public static void ConfigureDatabaseContext(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddDbContextFactory<CustomerAddressDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString(Grpc.Helpers.Constants.DatabaseConnectionString),
             options => options.EnableRetryOnFailure()));
-    } 
+    }
 
     public static void ConfigureGrpc(this IServiceCollection services)
     {
@@ -44,9 +43,9 @@ public static class IServiceCollectionExtensions
             options.Interceptors.Add<ServerLoggerInterceptor>();
         });
         services.AddGrpcReflection();
-        services.AddGrpc().AddJsonTranscoding(); 
+        services.AddGrpc().AddJsonTranscoding();
     }
-     
+
     public static void ConfigureAutoMapper(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetAssembly(typeof(AutoMapperProfile)));

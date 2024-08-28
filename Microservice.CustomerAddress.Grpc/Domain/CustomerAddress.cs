@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Microservice.Customer.Address.Grpc.Domain;
+namespace Microservice.CustomerAddress.Grpc.Domain;
 
 [Table("MSOS_CustomerAddress")]
 public class CustomerAddress
-{    
+{
     [Key]
     public Guid Id { get; set; }
 
