@@ -1,33 +1,22 @@
 ﻿using AutoMapper;
 using Grpc.Core;
-using Microservice.Customer.Address.Api.Protos;
-using Microservice.Customer.Address.Grpc.Data.Repository.Interfaces;
-using Microservice.Customer.Address.Grpc.Helpers.Exceptions;
+using Microservice.CustomerAddress.Api.Protos;
+using Microservice.CustomerAddress.Grpc.Data.Repository.Interfaces;
+using Microservice.CustomerAddress.Grpc.Helpers.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Microservice.Customer.Address.Grpc;
+namespace Microservice.CustomerAddress.Grpc.Service;
 
-public class CustomerAddressService : CustomerAddressGrpc.CustomerAddressGrpcBase
-{ 
-    private readonly ICustomerAddressRepository _customerAddressRepository;
-     
-    private readonly IMapper _mapper;
+public class CustomerAddressService(ICustomerAddressRepository customerAddressRepository, IMapper mapper) : CustomerAddressGrpc.CustomerAddressGrpcBase
+{
+    private readonly ICustomerAddressRepository _customerAddressRepository = customerAddressRepository;
 
-    public CustomerAddressService(ICustomerAddressRepository customerAddressRepository, IMapper mapper)
-    {
-        _customerAddressRepository = customerAddressRepository; 
-        _mapper = mapper;
-    }
+    private readonly IMapper _mapper = mapper;
 
     [Authorize]
     public override async Task<CustomerAddressResponse> GetCustomerAddress(CustomerAddressRequest request, ServerCallContext context)
     {
-        var customerAddress = await _customerAddressRepository.ByIdAsync(new Guid(request.CustomerId), new Guid(request.AddressId));
-        if (customerAddress == null)
-        {
-            throw new RpcNotFoundException(new Status(StatusCode.NotFound, "Customer address not found."));
-        }
-
+        var customerAddress = await _customerAddressRepository.ByIdAsync(new Guid(request.CustomerId), new Guid(request.AddressId)) ?? throw new RpcNotFoundException(new Status(StatusCode.NotFound, "Customer address not found."));
         return _mapper.Map<CustomerAddressResponse>(customerAddress);
     }
 }

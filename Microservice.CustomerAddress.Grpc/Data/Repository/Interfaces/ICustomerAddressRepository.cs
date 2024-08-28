@@ -1,6 +1,6 @@
-﻿namespace Microservice.Customer.Address.Grpc.Data.Repository.Interfaces;
+﻿namespace Microservice.CustomerAddress.Grpc.Data.Repository.Interfaces;
 
 public interface ICustomerAddressRepository
-{ 
-    Task<Grpc.Domain.CustomerAddress> ByIdAsync(Guid customerId, Guid addressId);  
+{
+    Task<Domain.CustomerAddress> ByIdAsync(Guid customerId, Guid addressId);
 }

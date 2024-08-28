@@ -1,5 +1,5 @@
-using Microservice.Customer.Address.Grpc.Extensions;
-using Microservice.Customer.Address.Grpc.Middleware; 
+using Microservice.CustomerAddress.Grpc.Extensions;
+using Microservice.CustomerAddress.Grpc.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.ConfigureExceptionHandling();
 builder.Services.ConfigureDI();
 builder.Services.ConfigureDatabaseContext(builder.Configuration);
-builder.Services.ConfigureJwt(); 
+builder.Services.ConfigureJwt();
 
 var app = builder.Build();
 

@@ -1,13 +1,11 @@
-﻿using Microservice.Customer.Address.Grpc.Helpers.Exceptions;
+﻿using Microservice.CustomerAddress.Grpc.Helpers.Exceptions;
 using System.Text.Json;
 
-namespace Microservice.Customer.Address.Grpc.Middleware;
+namespace Microservice.CustomerAddress.Grpc.Middleware;
 
-internal sealed class ExceptionHandlingMiddleware : IMiddleware
+internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger) : IMiddleware
 {
-    private readonly ILogger<ExceptionHandlingMiddleware> _logger;
-
-    public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger) => _logger = logger;
+    private readonly ILogger<ExceptionHandlingMiddleware> _logger = logger;
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
@@ -21,7 +19,7 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
             await HandleExceptionAsync(context, e);
         }
     }
-    
+
     private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
     {
         var statusCode = GetStatusCode(exception);
@@ -47,7 +45,7 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
                     var response = new
                     {
                         status = statusCode,
-                        detail = exception.Message 
+                        detail = exception.Message
                     };
 
                     await httpContext.Response.WriteAsync(JsonSerializer.Serialize(response));
@@ -60,8 +58,8 @@ internal sealed class ExceptionHandlingMiddleware : IMiddleware
         exception switch
         {
             BadRequestException => StatusCodes.Status400BadRequest,
-            NotFoundException => StatusCodes.Status404NotFound, 
+            NotFoundException => StatusCodes.Status404NotFound,
             _ => StatusCodes.Status500InternalServerError
-        };  
-    
+        };
+
 }
