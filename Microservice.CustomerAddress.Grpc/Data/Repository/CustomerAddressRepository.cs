@@ -6,11 +6,9 @@ namespace Microservice.CustomerAddress.Grpc.Data.Repository;
 
 public class CustomerAddressRepository(IDbContextFactory<CustomerAddressDbContext> dbContextFactory) : ICustomerAddressRepository
 {
-    public IDbContextFactory<CustomerAddressDbContext> _dbContextFactory { get; set; } = dbContextFactory;
-
     public async Task<Grpc.Domain.CustomerAddress> ByIdAsync(Guid customerId, Guid addressId)
     {
-        await using var db = await _dbContextFactory.CreateDbContextAsync();
+        await using var db = await dbContextFactory.CreateDbContextAsync();
         return await db.CustomerAddresses
                         .Where(o => o.Id.Equals(addressId) && o.CustomerId.Equals(customerId))
                         .Include(e => e.Country)

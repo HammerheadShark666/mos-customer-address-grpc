@@ -15,7 +15,7 @@ internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddl
         }
         catch (Exception e)
         {
-            _logger.LogError(e, e.Message);
+            _logger.LogError(e, "{e.Message}", e.Message);
             await HandleExceptionAsync(context, e);
         }
     }
@@ -61,5 +61,4 @@ internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddl
             NotFoundException => StatusCodes.Status404NotFound,
             _ => StatusCodes.Status500InternalServerError
         };
-
 }
