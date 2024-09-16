@@ -2,6 +2,7 @@ using Microservice.CustomerAddress.Grpc.Extensions;
 using Microservice.CustomerAddress.Grpc.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+var environment = builder.Environment;
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -15,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.ConfigureExceptionHandling();
 builder.Services.ConfigureDI();
-builder.Services.ConfigureDatabaseContext(builder.Configuration);
+builder.Services.ConfigureSqlServer(builder.Configuration, environment);
 builder.Services.ConfigureJwt();
 
 var app = builder.Build();
