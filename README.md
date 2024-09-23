@@ -7,7 +7,7 @@ This project is a **gRPC service** designed to retrieve customer address details
 
 ## Features
 
-- **Get Book Details**: Provides an endpoint to retrieve customer address information, including street, town/city, and postcode.
+- **Get Customer Address Details**: Provides an endpoint to retrieve customer address information, including street, town/city, and postcode.
 - **SQL Server Database**: Stores customer address information and allows for efficient querying.
 - **gRPC Protocol**: Utilizes the gRPC framework for high-performance communication.
 - **Scalable Architecture**: Designed for high scalability and performance.
